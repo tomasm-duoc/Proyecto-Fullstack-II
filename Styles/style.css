@@ -68,7 +68,7 @@ main {
 
 .card img {
     width: 100%;
-    height: 120px;
+    height: 80%;
     background-color: #ddd;
     object-fit: cover;
 }
