@@ -1,14 +1,10 @@
 import TarjetaServicio from '../molecules/TarjetaServicio.jsx'
 
-function Inicio() {
+function Inicio({ agregar }) {
   const servicios = [
-    { nombre: 'Cambio de Pantalla', precio: 35000, img: '/img/pantalla-rota.jpeg', alt: 'Pantalla' },
-    { nombre: 'Mantenimiento Preventivo', precio: 20000, img: '/img/pc-sucio.jpeg', alt: 'Limpieza' },
+    { id: 1, nombre: 'Cambio de Pantalla', precio: 35000, img: '/img/pantalla-rota.jpeg', alt: 'Pantalla' },
+    { id: 2, nombre: 'Mantenimiento Preventivo', precio: 20000, img: '/img/pc-sucio.jpeg', alt: 'Limpieza' },
   ]
-
-  function agregar(servicio) {
-    // aquí va la lógica de carrito.js
-  }
 
   return (
     <>
@@ -23,7 +19,7 @@ function Inicio() {
       <section className="grid">
         {servicios.map((s) => (
           <TarjetaServicio
-            key={s.nombre}
+            key={s.id}
             nombre={s.nombre}
             precio={s.precio}
             img={s.img}
