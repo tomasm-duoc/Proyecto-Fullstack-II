@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './components/organisms/Header.jsx'
 import Footer from './components/organisms/Footer.jsx'
 import Inicio from './components/pages/Inicio.jsx'
+import Catalogo from './components/pages/Catalogo.jsx'
 import Login from './components/pages/Login.jsx'
 import Contacto from './components/pages/Contacto.jsx'
 import Carrito from './components/pages/Carrito.jsx'
@@ -23,7 +24,8 @@ function App() {
     <>
       <Header setPagina={setPagina} cantidad={contarProductos(carrito)} />
       <main>
-        {pagina === 'inicio' && <Inicio agregar={agregar} />}
+        {pagina === 'inicio' && <Inicio agregar={agregar} setPagina={setPagina} />}
+        {pagina === 'catalogo' && <Catalogo agregar={agregar} />}
         {pagina === 'contacto' && <Contacto />}
         {pagina === 'carrito' && <Carrito carrito={carrito} quitar={quitar} />}
         {pagina === 'login' && <Login />}

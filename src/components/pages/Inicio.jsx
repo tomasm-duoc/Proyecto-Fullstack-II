@@ -1,10 +1,9 @@
-import TarjetaServicio from '../molecules/TarjetaServicio.jsx'
+import ListaServicios from '../organisms/ListaServicios.jsx'
+import Boton from '../atoms/Boton.jsx'
+import { servicios } from '../../scripts/servicios.js'
 
-function Inicio({ agregar }) {
-  const servicios = [
-    { id: 1, nombre: 'Cambio de Pantalla', precio: 35000, img: '/img/pantalla-rota.jpeg', alt: 'Pantalla' },
-    { id: 2, nombre: 'Mantenimiento Preventivo', precio: 20000, img: '/img/pc-sucio.jpeg', alt: 'Limpieza' },
-  ]
+function Inicio({ agregar, setPagina }) {
+  const destacados = servicios.filter((s) => s.destacado)
 
   return (
     <>
@@ -16,18 +15,11 @@ function Inicio({ agregar }) {
       <h3>Servicios Destacados</h3>
       <br />
 
-      <section className="grid">
-        {servicios.map((s) => (
-          <TarjetaServicio
-            key={s.id}
-            nombre={s.nombre}
-            precio={s.precio}
-            img={s.img}
-            alt={s.alt}
-            onAgregar={() => agregar(s)}
-          />
-        ))}
-      </section>
+      <ListaServicios servicios={destacados} agregar={agregar} />
+
+      <div className="centrado">
+        <Boton texto="Ver catálogo completo" onClick={() => setPagina('catalogo')} />
+      </div>
     </>
   )
 }
