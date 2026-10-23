@@ -1,3 +1,5 @@
+import Boton from '../atoms/Boton.jsx'
+
 function TarjetaServicio({ nombre, precio, img, alt, onAgregar }) {
   return (
     <article className="card">
