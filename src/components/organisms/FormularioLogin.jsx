@@ -2,6 +2,7 @@ import { useState } from 'react'
 import CampoFormulario from '../molecules/CampoFormulario.jsx'
 import Input from '../atoms/Input.jsx'
 import Boton from '../atoms/Boton.jsx'
+import { dominiosPermitidos, esCorreoValido, esPasswordValida } from '../../scripts/validaciones.js'
 
 function FormularioLogin() {
   const [email, setEmail] = useState('')
@@ -9,25 +10,18 @@ function FormularioLogin() {
   const [error, setError] = useState('')
   const [exito, setExito] = useState('')
 
-  // Cambia esta lista por los dominios que te pidan
-  const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
-
   function ingresar(e) {
     e.preventDefault()
     setError('')
     setExito('')
 
-    const partes = email.trim().toLowerCase().split('@')
-    const usuario = partes[0]
-    const dominio = partes[1]
-
-    if (partes.length !== 2 || usuario === '' || !dominiosPermitidos.includes(dominio)) {
+    if (!esCorreoValido(email)) {
       const lista = dominiosPermitidos.map((d) => '@' + d).join(', ')
       setError('El correo debe terminar en: ' + lista)
       return
     }
 
-    if (pass.length < 4 || pass.length > 10) {
+    if (!esPasswordValida(pass)) {
       setError('La contraseña debe tener entre 4 y 10 caracteres')
       return
     }

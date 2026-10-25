@@ -3,6 +3,7 @@ import CampoFormulario from '../molecules/CampoFormulario.jsx'
 import Input from '../atoms/Input.jsx'
 import Textarea from '../atoms/Textarea.jsx'
 import Boton from '../atoms/Boton.jsx'
+import { dominiosPermitidos, esCorreoValido, tieneLargo } from '../../scripts/validaciones.js'
 
 function FormularioContacto() {
   const [nombre, setNombre] = useState('')
@@ -11,31 +12,24 @@ function FormularioContacto() {
   const [error, setError] = useState('')
   const [exito, setExito] = useState('')
 
-  // Usa la misma lista que en FormularioLogin
-  const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
-
   function enviar(e) {
     e.preventDefault()
     setError('')
     setExito('')
 
-    if (nombre.trim().length < 2) {
-      setError('El usuario debe tener al menos 2 caracteres')
+    if (!tieneLargo(nombre, 2, 100)) {
+      setError('El usuario debe tener entre 2 y 100 caracteres')
       return
     }
 
-    const partes = correo.trim().toLowerCase().split('@')
-    const usuario = partes[0]
-    const dominio = partes[1]
-
-    if (partes.length !== 2 || usuario === '' || !dominiosPermitidos.includes(dominio)) {
+    if (!esCorreoValido(correo)) {
       const lista = dominiosPermitidos.map((d) => '@' + d).join(', ')
       setError('El correo debe terminar en: ' + lista)
       return
     }
 
-    if (comentario.trim().length < 2) {
-      setError('El comentario debe tener al menos 2 caracteres')
+    if (!tieneLargo(comentario, 2, 500)) {
+      setError('El comentario debe tener entre 2 y 500 caracteres')
       return
     }
 
